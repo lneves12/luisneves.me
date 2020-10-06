@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "Foundation",
+    "title": "Luis Neves",
     "titleTemplate": "%s",
-    "description": "A starter to launch your blazing fast personal website and a blog, Built with Gatsby and Netlify CMS. Made with ❤ by Stackrole",
-    "siteUrl": "https://foundation.stackrole.com",
-    "image": "/assets/stackrole.png",
-    "twitterUsername": "@stackrole"
+    "description": "Luis Neves technical blog",
+    "siteUrl": "https://luisneves.me/",
+    "image": "/assets/luisneves_fav.png",
+    "twitterUsername": "@luis_neves12"
   },
-  "ga": "UA-XXXXXXXXX-X"
+  "ga": "UA-33712320-1"
 }

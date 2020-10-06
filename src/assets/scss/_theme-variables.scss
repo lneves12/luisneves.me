@@ -9,26 +9,26 @@ $breakpoint-xl: 1200px;
 	--font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
 	--font-family-mono: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
   --font-size-small: 12px;
-  
-  --primary-color: #5C2941;
-  --header-bg: #5C2941;
 
-  --home-link-color: #A1613F;
+  --primary-color: #AFB3F7;
+  --header-bg: #171A21;
+
+  --home-link-color: #7A93AC;
   --home-link-hover-color:  var(--primary-color);
 
-  --button-color: #E5C3D3;
-  --button-alternate-color: #5C2941;
+  --button-color: #171A21;
+  --button-alternate-color: #92BCEA;
 
   --post-link-color: #0F070B;
 
 
-  --nav-link-hover-bg: #111;
+  --nav-link-hover-bg: #rrrrr;
   --text-color-meta: rgba(0,0,0,0.5);
 
   --label-text: rgba(0,0,0,0.5);
-  --input-focus-border: #83AAAC;
-  
+  --input-focus-border: #ff0000;
+
   // CSS Grid Utility
-  --grid-gap: 30px; 
+  --grid-gap: 30px;
 
 }
