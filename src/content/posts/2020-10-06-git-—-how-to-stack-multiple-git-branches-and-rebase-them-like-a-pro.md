@@ -1,10 +1,10 @@
 ---
 template: blog-post
-title: Git - how to stack multiple git branches and rebase them like a pro
+title: Git - How to stack multiple git branches and rebase them like a pro
 slug: git-rebase-like-pro
 date: 2020-10-06 15:26
-description: "programming software git rebase git-flow engineering "
-featuredImage: /assets/pngegg.png
+description: How to stack multiple git branches and rebase them like a pro
+featuredImage: ""
 ---
 **Difficulty:** *intermediate*
 
