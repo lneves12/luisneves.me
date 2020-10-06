@@ -9,4 +9,6 @@ cta:
   ctaLink: /about
 ---
 Living in Lisbon, Portugal
-Working at memSQL
+
+
+Working at [memSQL](http://memsql.com/)
