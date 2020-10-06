@@ -1,13 +1,12 @@
 ---
 template: blog-post
-title: Git — how to stack multiple git branches and rebase them like a pro
+title: Git - how to stack multiple git branches and rebase them like a pro
 slug: git-rebase-like-pro
 date: 2020-10-06 15:26
 description: "programming software git rebase git-flow engineering "
+featuredImage: /assets/pngegg.png
 ---
 **Difficulty:** *intermediate*
-
-
 
 It took me quite some time to start feeling comfortable with git, and although I still know I have a lot to learn I finally feel confident not to screw up.
 
@@ -58,11 +57,6 @@ There is more than one way to fix this, but there is a neat one-line way of solv
 * From branch-B run “*git rebase -i branch-A”* this will make the rebase interactive and editable.
 * Drop all the old/repeated commits from branch-A present on branch-B. You have to make sure only commits from branch-B will be rebased.
 
-```gitconfig
-drop 5c6ffd7216 old commit from branch-A
-pick aa264493fb commit from branch-B
-```
-
-Example: git rebase -i branch-A
+  ![Example: git rebase -i branch-A](/assets/1_c_evbrxsv35zgfhswrx3qw.png "Example: git rebase -i branch-A")
 
 That’s it! No more nonsense conflicts. You might still have conflicts, but those you really need to fix :)
