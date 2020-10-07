@@ -15,10 +15,6 @@ const MenuItems = [
     path: "/blog",
     title: "Blog"
   },
-  {
-    path: "/contact",
-    title: "Contact"
-  },
 ]
 
 const ListLink = (props) => (<li><Link to={props.to}>{props.children}</Link></li>)
@@ -33,13 +29,13 @@ class Navigation extends React.Component {
   }
 
   handleToggleClick() {
-    this.setState(state => ({      
-      showMenu: !state.showMenu    
+    this.setState(state => ({
+      showMenu: !state.showMenu
     }))
   }
 
   render () {
-    const listMenuItems = MenuItems.map((menuItem, index) => 
+    const listMenuItems = MenuItems.map((menuItem, index) =>
       <ListLink key={index} to={menuItem.path}>{menuItem.title}</ListLink>
     )
     return (
