@@ -1,7 +1,6 @@
 ---
 template: blog-post
-title: How To Gradually Introduce React.js in an Old Application and migrate it
-  to a SPA - Don’t be afraid of legacy
+title: "How To Gradually Introduce React.js - Don’t be afraid of legacy "
 slug: introduce-reactjs-old-application-spa
 date: 2019-10-14 00:03
 description: How To Gradually Introduce React.js in an Old Application and
