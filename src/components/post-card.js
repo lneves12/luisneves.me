@@ -4,9 +4,11 @@ import Img from "gatsby-image"
 
 const PostCard = ({ data }) => {
 
+  const targetSlugUrl = `/${data.frontmatter.slug}`;
+
   let featuredContent;
   if(data.frontmatter.featuredImage) {
-    featuredContent = <Link to={data.frontmatter.slug}>
+    featuredContent = <Link to={targetSlugUrl}>
       <Img
         fluid={data.frontmatter.featuredImage.childImageSharp.fluid}
         objectFit="cover"
@@ -16,7 +18,7 @@ const PostCard = ({ data }) => {
       />
     </Link>
   } else {
-    featuredContent = <Link className="description" to={data.frontmatter.slug}>{data.excerpt}</Link>;
+    featuredContent = <Link className="description" to={targetSlugUrl}>{data.excerpt}</Link>;
   }
 
 
@@ -25,7 +27,7 @@ const PostCard = ({ data }) => {
 
 
       <div class="post-content">
-        <h2 className="title"><Link to={data.frontmatter.slug}>{data.frontmatter.title}</Link></h2>
+        <h2 className="title"><Link to={targetSlugUrl}>{data.frontmatter.title}</Link></h2>
         <p className="meta">
           <time>{data.frontmatter.date}</time>
         </p>
