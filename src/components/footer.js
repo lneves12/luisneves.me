@@ -1,12 +1,10 @@
 import React from "react"
-import {Link} from "gatsby"
-import { RiTwitterLine } from "react-icons/ri";
+import Social from "./social"
 
 const Footer = () => (
   <footer className="site-footer">
     <div className="container">
-      <RiTwitterLine />
-      <p><Link to="/">luisneves.me</Link></p>
+      <Social size={20} />
     </div>
   </footer>
 )

@@ -10,13 +10,13 @@ const PostMaker = ({ data }) => (
     <div className="grids col-1 sm-2 lg-3">
       {data}
     </div>
-    <Link className="button" to="/blog">See more<span class="icon -right"><RiArrowRightSLine/></span></Link>
+    {data.length >= 6 && <Link className="button" to="/blog">See more<span class="icon -right"><RiArrowRightSLine/></span></Link>}
   </section>
 )
 
 export default function BlogListHome() {
   return (
-    <StaticQuery 
+    <StaticQuery
       query={graphql`
         query {
           allMarkdownRemark(
@@ -54,7 +54,7 @@ export default function BlogListHome() {
               <PostCard key={edge.node.id} data={edge.node} />
           )
           return <PostMaker data={posts} />
-        } 
+        }
       }
     />
   )

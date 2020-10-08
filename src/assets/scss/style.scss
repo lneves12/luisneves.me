@@ -370,6 +370,13 @@ article img {
 	}
 }
 
+.social-icons-container {
+	a:not(:first-child) {
+		font-weight: normal;
+		margin: 0px 10px;
+	}
+}
+
 .pagination {
 	text-align: center;
 	padding: 50px 0;
