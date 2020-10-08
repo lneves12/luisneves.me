@@ -4,7 +4,6 @@ title: Git - How to stack multiple git branches and rebase them like a pro
 slug: git-rebase-like-pro
 date: 2020-10-06 15:26
 description: How to stack multiple git branches and rebase them like a pro
-featuredImage: ""
 ---
 **Difficulty:** *intermediate*
 
