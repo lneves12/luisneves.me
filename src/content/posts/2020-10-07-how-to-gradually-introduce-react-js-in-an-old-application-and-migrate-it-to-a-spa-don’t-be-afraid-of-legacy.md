@@ -28,7 +28,7 @@ In Uyuni, in order to modernize our UI and technology stack, we decided to pick 
 
 The strategy we followed was to take advantage of the flexibility of this method to start introducing independent React.js trees. This way we could gradually implement new features and refactor old parts of the UI. In the following image, the blue boxes are now using React.js, and the red ones are still using the legacy server-side rendered JSP stack.
 
-![blog 1](/assets/blog_1.png "blog 1")
+![react template boxes](/assets/blog_1.png)
 
 Having this structure settled, we could progressively add React.js to more pages on demand.
 
@@ -40,19 +40,19 @@ To register these new apps and inject data into them from a server-side templati
 
 Using this strategy, webpack will automatically create a new bundle file for each React.js application that will only be fetched when the application is loaded. Uyuni only needs to be aware of the `main.bundle.js` file, which will export a global function that is capable of loading any registered application.
 
-![webpack architecture diagram](https://miro.medium.com/max/510/0*sAO7jMCommj1_AzU)
+![webpack architecture diagram](/assets/blog_2.png)
 
-![*main.bundle.js — base code needed to bootstrap any app through the global function spaImportReactPage*](https://miro.medium.com/max/1592/0*zv96Q8PlsVwUaHCx "*main.bundle.js — base code needed to bootstrap any app through the global function spaImportReactPage*")
+![*main.bundle.js — base code needed to bootstrap any app through the global function spaImportReactPage*](/assets/blog_3.png "*main.bundle.js — base code needed to bootstrap any app through the global function spaImportReactPage*")
 
-*main.bundle.js - base code needed to bootstrap any app through the global function spaImportReactPage*
 
-![*Registering a new app and entry point for its JS bundle*](https://miro.medium.com/max/1600/0*qOxyf2jS6hK7meRU "*Registering a new app and entry point for its JS bundle*")
+
+![*Registering a new app and entry point for its JS bundle*](/assets/blog_4.png "*Registering a new app and entry point for its JS bundle*")
 
 *Registering a new app and entry point for its JS bundle*
 
 This way it will be simple to asynchronously load any registered React.js application by name from any server-side templating technology. The method `spaImportReactPage` will return a promise with a renderer function that can be used to render our app anywhere and inject some initial state into it.
 
-![*Example of the usage of the function SpaImportReactPage in html templating*](/assets/blog_1.png "*Example of the usage of the function SpaImportReactPage in html templating*")
+![*Example of the usage of the function SpaImportReactPage in html templating*](/assets/blog_5.png "*Example of the usage of the function SpaImportReactPage in html templating*")
 
 Note: Bear in mind that this code is being executed inline on the HTML without any Babel transpilation. Therefore, if you need to support old browsers like Internet Explorer, you might need to add a polyfill for promises!
 
@@ -62,7 +62,7 @@ Another problem we faced was that even having a more recent stack, we couldn’t
 
 Gladly this looked like a more *complex* problem than it really was. Using [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware), we can have a local webpack server doing all the black magic of recompiling our JavaScript changes and hot updates. This way we can serve all the updated files from our local environment, but still, proxy everything that isn’t front-end related and depends on a back-end server. It can be either a local development server or a remote shared test server. Thus, if you only need to work on the front end, there is no need to install the whole back end as before and still enjoy all the awesome webpack/hot-reload features.
 
-![Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>](https://miro.medium.com/max/395/0*V-SrcNnmDRYV2anu "Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>")
+![Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>](/assets/blog_6.png "Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>")
 
 *Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>*
 
@@ -72,7 +72,7 @@ Despite having a more recent stack and a fast development cycle, we were still n
 
 It was clear that the right direction to improve this behavior would be to move from a multi-page to a SPA architecture. When starting a new application from scratch, this can be achieved by developing an independent front-end application that controls all the pages with client routing through [react-router](https://github.com/ReactTraining/react-router) and fetches all the needed data from a JSON/graphql API. However, moving an existing legacy application towards this style can be an unfeasible effort without huge refactors.
 
-![Green areas represent the cost on a new page](https://miro.medium.com/max/809/0*JgMQ03Axzb5nYfsY "Green areas represent the cost on a new page")
+![Green areas represent the cost on a new page](/assets/blog_7.png "Green areas represent the cost on a new page")
 
 *Green areas represent the cost on a new page*
 
@@ -87,7 +87,7 @@ The major challenges we faced were:
 
 Anyway, the amount of work needed was minimal compared to an architectural refactor.
 
-![Green areas represent the cost on a new page](https://miro.medium.com/max/913/0*6u7CqWxW2vRcoO2u "Green areas represent the cost on a new page")
+![Green areas represent the cost on a new page](/assets/blog_8.png "Green areas represent the cost on a new page")
 
 *Green areas represent the cost on a new page*
 
@@ -103,13 +103,13 @@ As the React rendering is done client-side, this behavior is to be expected. Sen
 
 The good thing is that Senna.js transitions behavior can be easily extended. Thus, we don’t have to use the synchronous default transition.
 
-![**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render](https://miro.medium.com/max/1305/0*r4UqVtDfigppeCXB "**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render")
+![**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render](/assets/blog_gif.gif "**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render")
 
 **\*Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render*
 
 Instead, we can extend it to be asynchronous and only show the new page when the render is finished, leaving the old page as a placeholder. Basically, it will render both pages on the screen and only show the new one when everything is ready.
 
-![**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition](https://miro.medium.com/max/1305/0*rXt_4QY78n5gFdM2 "**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition")
+![**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition](/assets/blog_gif2.gif "**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition")
 
 **\*Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition*
 
