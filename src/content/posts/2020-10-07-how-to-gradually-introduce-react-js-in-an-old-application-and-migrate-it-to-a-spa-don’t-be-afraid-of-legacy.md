@@ -42,17 +42,15 @@ Using this strategy, webpack will automatically create a new bundle file for eac
 
 ![webpack architecture diagram](/assets/blog_2.png)
 
-![*main.bundle.js — base code needed to bootstrap any app through the global function spaImportReactPage*](/assets/blog_3.png "*main.bundle.js — base code needed to bootstrap any app through the global function spaImportReactPage*")
+![main.bundle.js — base code needed to bootstrap any app through the global function spaImportReactPage](/assets/blog_3.png "main.bundle.js — base code needed to bootstrap any app through the global function spaImportReactPage")
+
+![Registering a new app and entry point for its JS bundle](/assets/blog_4.png "Registering a new app and entry point for its JS bundle")
 
 
-
-![*Registering a new app and entry point for its JS bundle*](/assets/blog_4.png "*Registering a new app and entry point for its JS bundle*")
-
-*Registering a new app and entry point for its JS bundle*
 
 This way it will be simple to asynchronously load any registered React.js application by name from any server-side templating technology. The method `spaImportReactPage` will return a promise with a renderer function that can be used to render our app anywhere and inject some initial state into it.
 
-![*Example of the usage of the function SpaImportReactPage in html templating*](/assets/blog_5.png "*Example of the usage of the function SpaImportReactPage in html templating*")
+![Example of the usage of the function SpaImportReactPage in html templating](/assets/blog_5.png "Example of the usage of the function SpaImportReactPage in html templating")
 
 Note: Bear in mind that this code is being executed inline on the HTML without any Babel transpilation. Therefore, if you need to support old browsers like Internet Explorer, you might need to add a polyfill for promises!
 
@@ -64,7 +62,7 @@ Gladly this looked like a more *complex* problem than it really was. Using [webp
 
 ![Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>](/assets/blog_6.png "Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>")
 
-*Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>*
+
 
 # **Single Page Application**
 
@@ -73,8 +71,6 @@ Despite having a more recent stack and a fast development cycle, we were still n
 It was clear that the right direction to improve this behavior would be to move from a multi-page to a SPA architecture. When starting a new application from scratch, this can be achieved by developing an independent front-end application that controls all the pages with client routing through [react-router](https://github.com/ReactTraining/react-router) and fetches all the needed data from a JSON/graphql API. However, moving an existing legacy application towards this style can be an unfeasible effort without huge refactors.
 
 ![Green areas represent the cost on a new page](/assets/blog_7.png "Green areas represent the cost on a new page")
-
-*Green areas represent the cost on a new page*
 
 After some research and consideration, we decided to use a more pragmatic approach and follow a hybrid architectural style between a multi-page and SPA. Basically, the idea is that our routes are defined by the links themselves, and the server keeps rendering all the full pages in the same way. But instead of doing a full refresh of the page, we fetch the same link URL through an Ajax call, only replacing the needed parts on the page. This can save a lot of time while initializing a new JavaScript engine, to fetch and parse common resources, and to paint unchanged pieces. It also helps to avoid reconnecting WebSocket connections on every page.
 
@@ -89,8 +85,6 @@ Anyway, the amount of work needed was minimal compared to an architectural refac
 
 ![Green areas represent the cost on a new page](/assets/blog_8.png "Green areas represent the cost on a new page")
 
-*Green areas represent the cost on a new page*
-
 Feel free to take a look at our main configuration with Senna.js/SPA: [https://github.com/uyuni-project/uyuni/tree/master/web/html/src/core/spa](https://twitter.com/luis_neves12)
 
 # Making Transitions Even Better
@@ -103,15 +97,11 @@ As the React rendering is done client-side, this behavior is to be expected. Sen
 
 The good thing is that Senna.js transitions behavior can be easily extended. Thus, we don’t have to use the synchronous default transition.
 
-![**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render](/assets/blog_gif.gif "**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render")
-
-**\*Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render*
+![Image with white screen: old page -> remove old page -> transition -> add new page -> white screen -> finish render](/assets/blog_gif.gif "Image with white screen: old page -> remove old page -> transition -> add new page -> white screen -> finish render")
 
 Instead, we can extend it to be asynchronous and only show the new page when the render is finished, leaving the old page as a placeholder. Basically, it will render both pages on the screen and only show the new one when everything is ready.
 
-![**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition](/assets/blog_gif2.gif "**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition")
-
-**\*Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition*
+![Image with asynchronous transition: old page -> add new page -> finish render -> remove old page -> finish transition](/assets/blog_gif2.gif "Image with asynchronous transition: old page -> add new page -> finish render -> remove old page -> finish transition")
 
 Extra work can be done on the timing when the fetching happens to take advantage of the fact that all pages are fetched through Ajax. By default, the fetching happens when the user clicks a link.
 
