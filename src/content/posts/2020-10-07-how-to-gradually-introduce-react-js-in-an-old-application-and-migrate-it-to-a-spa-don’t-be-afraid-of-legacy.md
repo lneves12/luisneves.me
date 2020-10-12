@@ -28,7 +28,7 @@ In Uyuni, in order to modernize our UI and technology stack, we decided to pick 
 
 The strategy we followed was to take advantage of the flexibility of this method to start introducing independent React.js trees. This way we could gradually implement new features and refactor old parts of the UI. In the following image, the blue boxes are now using React.js, and the red ones are still using the legacy server-side rendered JSP stack.
 
-![Image for post](https://miro.medium.com/max/1280/0*601O1QG_wExVlzsg)
+![blog 1](/assets/blog_1.png "blog 1")
 
 Having this structure settled, we could progressively add React.js to more pages on demand.
 
