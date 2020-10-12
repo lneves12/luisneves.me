@@ -21,7 +21,7 @@ If you want to keep shipping new features while introducing new technologies, yo
 
 When it comes to front-end technologies, generally speaking, there are some rules that I believe can help you not to be locked to a specific technology. For instance, always think twicewhen:
 
-* Adding a new library. Just because it will save you a couple of days at that moment it doesn’t necessarily mean it will be worth in the long term.
+* Adding a new library. Just because it will save you a couple of days at that moment, it doesn’t necessarily mean it will be worth in the long term.
 * Coupling your business logic to a specific framework. If all your logic is completely independent and only relies on the language native features, it doesn’t really matter which framework you use, whether it’s React.js, Vue.js, or Angular: The code should be reusable.
 
 In Uyuni, in order to modernize our UI and technology stack, we decided to pick React.js. The React.js team did a great job of making it easy to integrate into existing applications. Looking at the official [documentation](https://reactjs.org/docs/add-react-to-a-website.html), we can see that adding React.js in the middle of a page is as simple as defining a new HTML element id that will serve as the container/root for our new application and simply calling the method `ReactDOM.render`(`<App />`, `htmlContainer`). A huge plus to this method that many people don’t know is that you can execute it as many times as you need on the same page, which can be quite handy.
@@ -46,8 +46,6 @@ Using this strategy, webpack will automatically create a new bundle file for eac
 
 ![Registering a new app and entry point for its JS bundle](/assets/blog_4.png "Registering a new app and entry point for its JS bundle")
 
-
-
 This way it will be simple to asynchronously load any registered React.js application by name from any server-side templating technology. The method `spaImportReactPage` will return a promise with a renderer function that can be used to render our app anywhere and inject some initial state into it.
 
 ![Example of the usage of the function SpaImportReactPage in html templating](/assets/blog_5.png "Example of the usage of the function SpaImportReactPage in html templating")
@@ -61,8 +59,6 @@ Another problem we faced was that even having a more recent stack, we couldn’t
 Gladly this looked like a more *complex* problem than it really was. Using [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware), we can have a local webpack server doing all the black magic of recompiling our JavaScript changes and hot updates. This way we can serve all the updated files from our local environment, but still, proxy everything that isn’t front-end related and depends on a back-end server. It can be either a local development server or a remote shared test server. Thus, if you only need to work on the front end, there is no need to install the whole back end as before and still enjoy all the awesome webpack/hot-reload features.
 
 ![Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>](/assets/blog_6.png "Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>")
-
-
 
 # **Single Page Application**
 
