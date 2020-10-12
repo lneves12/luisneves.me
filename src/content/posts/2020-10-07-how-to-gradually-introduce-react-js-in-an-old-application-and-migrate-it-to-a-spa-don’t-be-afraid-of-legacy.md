@@ -50,19 +50,11 @@ Using this strategy, webpack will automatically create a new bundle file for eac
 
 *Registering a new app and entry point for its JS bundle*
 
-
-
 This way it will be simple to asynchronously load any registered React.js application by name from any server-side templating technology. The method `spaImportReactPage` will return a promise with a renderer function that can be used to render our app anywhere and inject some initial state into it.
 
-![*Example of the usage of the function SpaImportReactPage in html templating*](https://miro.medium.com/max/1600/0*p14qpT0Ukm2ZBX_J "*Example of the usage of the function SpaImportReactPage in html templating*")
-
-*Example of the usage of the function SpaImportReactPage in html templating*
-
-
+![*Example of the usage of the function SpaImportReactPage in html templating*](/assets/blog_1.png "*Example of the usage of the function SpaImportReactPage in html templating*")
 
 Note: Bear in mind that this code is being executed inline on the HTML without any Babel transpilation. Therefore, if you need to support old browsers like Internet Explorer, you might need to add a polyfill for promises!
-
-
 
 # **Faster Development Cycle**
 
@@ -74,8 +66,6 @@ Gladly this looked like a more *complex* problem than it really was. Using [webp
 
 *Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>*
 
-
-
 # **Single Page Application**
 
 Despite having a more recent stack and a fast development cycle, we were still not entirely happy with the final result. As we still had an old multi-page architectural style, every time a user clicked on a new page, a full refresh would happen. Although this architecture can work for simpler and less dynamic web applications, in our case it was affecting the overall experience of using the UI.
@@ -85,8 +75,6 @@ It was clear that the right direction to improve this behavior would be to move 
 ![Green areas represent the cost on a new page](https://miro.medium.com/max/809/0*JgMQ03Axzb5nYfsY "Green areas represent the cost on a new page")
 
 *Green areas represent the cost on a new page*
-
-
 
 After some research and consideration, we decided to use a more pragmatic approach and follow a hybrid architectural style between a multi-page and SPA. Basically, the idea is that our routes are defined by the links themselves, and the server keeps rendering all the full pages in the same way. But instead of doing a full refresh of the page, we fetch the same link URL through an Ajax call, only replacing the needed parts on the page. This can save a lot of time while initializing a new JavaScript engine, to fetch and parse common resources, and to paint unchanged pieces. It also helps to avoid reconnecting WebSocket connections on every page.
 
@@ -103,11 +91,7 @@ Anyway, the amount of work needed was minimal compared to an architectural refac
 
 *Green areas represent the cost on a new page*
 
-
-
 Feel free to take a look at our main configuration with Senna.js/SPA: [https://github.com/uyuni-project/uyuni/tree/master/web/html/src/core/spa](https://twitter.com/luis_neves12)
-
-
 
 # Making Transitions Even Better
 
@@ -121,23 +105,17 @@ The good thing is that Senna.js transitions behavior can be easily extended. Thu
 
 ![**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render](https://miro.medium.com/max/1305/0*r4UqVtDfigppeCXB "**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render")
 
-***Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render*
-
-
+**\*Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render*
 
 Instead, we can extend it to be asynchronous and only show the new page when the render is finished, leaving the old page as a placeholder. Basically, it will render both pages on the screen and only show the new one when everything is ready.
 
 ![**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition](https://miro.medium.com/max/1305/0*rXt_4QY78n5gFdM2 "**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition")
 
-***Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition*
-
-
+**\*Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition*
 
 Extra work can be done on the timing when the fetching happens to take advantage of the fact that all pages are fetched through Ajax. By default, the fetching happens when the user clicks a link.
 
 However, this can be optimized. For instance, we could start fetching a page when the user shows the intent of clicking a link while hovering over it for some seconds or (even more extreme) start fetching it on the mouse-down event. The click event only happens after the mouse-up event, therefore we could save some milliseconds due to hardware limitations speed between the mouse-down and mouse-up events. After doing some tests with this strategy, we noticed improvement of around 100ms on each transition.
-
-
 
 # Conclusion
 
