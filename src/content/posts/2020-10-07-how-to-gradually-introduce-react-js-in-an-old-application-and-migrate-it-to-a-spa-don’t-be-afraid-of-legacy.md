@@ -95,17 +95,13 @@ The good thing is that Senna.js transitions behavior can be easily extended. Thu
 
 ![Image for post](https://miro.medium.com/max/1305/0*r4UqVtDfigppeCXB)
 
-***Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render*
-
-
+**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render
 
 Instead, we can extend it to be asynchronous and only show the new page when the render is finished, leaving the old page as a placeholder. Basically, it will render both pages on the screen and only show the new one when everything is ready.
 
 ![Image for post](https://miro.medium.com/max/1305/0*rXt_4QY78n5gFdM2)
 
-***Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition*
-
-
+**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition
 
 Extra work can be done on the timing when the fetching happens to take advantage of the fact that all pages are fetched through Ajax. By default, the fetching happens when the user clicks a link.
 
