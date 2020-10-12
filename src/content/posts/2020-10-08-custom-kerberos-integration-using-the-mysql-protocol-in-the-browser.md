@@ -51,7 +51,7 @@ The remaining question now is: how do we integrate that with the MySQL protocol 
 
 Thinking a little outside the box, the answer can be simpler than it looks:
 
-* We extended the MySQL *"Auth Switch Request Packet"* so that when it receives the "auth_gssapi_client" auth request, it will do an HTTP get request to a custom API endpoint controlled by Studio.
+* We extended the MySQL *"Auth Switch Request Packet"* so that when it receives the *"auth\_gssapi\_client"* auth request, it will do an HTTP get request to a custom API endpoint controlled by Studio.
 * This new endpoint, instead of implementing the full Spnego protocol, implements only the first part of it. We don't want to have Kerberos service ticket validation logic in Studio, as said before that logic should be part of the cluster authentication.
 * This first part consists of:
 
