@@ -93,11 +93,19 @@ As the React rendering is done client-side, this behavior is to be expected. Sen
 
 The good thing is that Senna.js transitions behavior can be easily extended. Thus, we don’t have to use the synchronous default transition.
 
-![Image with white screen: old page -> remove old page -> transition -> add new page -> white screen -> finish render](/assets/blog_gif.gif "Image with white screen: old page -> remove old page -> transition -> add new page -> white screen -> finish render")
+![Image for post](https://miro.medium.com/max/1305/0*r4UqVtDfigppeCXB)
+
+***Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render*
+
+
 
 Instead, we can extend it to be asynchronous and only show the new page when the render is finished, leaving the old page as a placeholder. Basically, it will render both pages on the screen and only show the new one when everything is ready.
 
-![Image with asynchronous transition: old page -> add new page -> finish render -> remove old page -> finish transition](/assets/blog_gif2.gif "Image with asynchronous transition: old page -> add new page -> finish render -> remove old page -> finish transition")
+![Image for post](https://miro.medium.com/max/1305/0*rXt_4QY78n5gFdM2)
+
+***Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition*
+
+
 
 Extra work can be done on the timing when the fetching happens to take advantage of the fact that all pages are fetched through Ajax. By default, the fetching happens when the user clicks a link.
 
@@ -107,4 +115,4 @@ However, this can be optimized. For instance, we could start fetching a page whe
 
 To sum up, even if we still have a lot of room for improvement, we are quite happy with our endeavors so far. Compared to what we had before, we are getting closer to having a web application that looks like a native desktop application. Even having all these improvements, we didn’t have big architectural refactors. This can be valuable, especially in a product where most of the developers are back-end-focused, hence reducing the friction of new contributions in the front end.
 
-Feel free to reach out with a comment if you want to discuss something further.
+Feel free to reach out with a comment or through twitter if you want to discuss something further.
