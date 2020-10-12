@@ -44,7 +44,11 @@ Using this strategy, webpack will automatically create a new bundle file for eac
 
 ![*main.bundle.js — base code needed to bootstrap any app through the global function spaImportReactPage*](https://miro.medium.com/max/1592/0*zv96Q8PlsVwUaHCx "*main.bundle.js — base code needed to bootstrap any app through the global function spaImportReactPage*")
 
+*main.bundle.js - base code needed to bootstrap any app through the global function spaImportReactPage*
+
 ![*Registering a new app and entry point for its JS bundle*](https://miro.medium.com/max/1600/0*qOxyf2jS6hK7meRU "*Registering a new app and entry point for its JS bundle*")
+
+*Registering a new app and entry point for its JS bundle*
 
 
 
@@ -52,9 +56,13 @@ This way it will be simple to asynchronously load any registered React.js applic
 
 ![*Example of the usage of the function SpaImportReactPage in html templating*](https://miro.medium.com/max/1600/0*p14qpT0Ukm2ZBX_J "*Example of the usage of the function SpaImportReactPage in html templating*")
 
+*Example of the usage of the function SpaImportReactPage in html templating*
+
 
 
 Note: Bear in mind that this code is being executed inline on the HTML without any Babel transpilation. Therefore, if you need to support old browsers like Internet Explorer, you might need to add a polyfill for promises!
+
+
 
 # **Faster Development Cycle**
 
@@ -63,6 +71,8 @@ Another problem we faced was that even having a more recent stack, we couldn’t
 Gladly this looked like a more *complex* problem than it really was. Using [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware), we can have a local webpack server doing all the black magic of recompiling our JavaScript changes and hot updates. This way we can serve all the updated files from our local environment, but still, proxy everything that isn’t front-end related and depends on a back-end server. It can be either a local development server or a remote shared test server. Thus, if you only need to work on the front end, there is no need to install the whole back end as before and still enjoy all the awesome webpack/hot-reload features.
 
 ![Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>](https://miro.medium.com/max/395/0*V-SrcNnmDRYV2anu "Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>")
+
+*Feel free to take a peek on our webpack proxy configuration: <https://github.com/uyuni-project/uyuni/tree/master/web/html/src/build>*
 
 
 
@@ -73,6 +83,8 @@ Despite having a more recent stack and a fast development cycle, we were still n
 It was clear that the right direction to improve this behavior would be to move from a multi-page to a SPA architecture. When starting a new application from scratch, this can be achieved by developing an independent front-end application that controls all the pages with client routing through [react-router](https://github.com/ReactTraining/react-router) and fetches all the needed data from a JSON/graphql API. However, moving an existing legacy application towards this style can be an unfeasible effort without huge refactors.
 
 ![Green areas represent the cost on a new page](https://miro.medium.com/max/809/0*JgMQ03Axzb5nYfsY "Green areas represent the cost on a new page")
+
+*Green areas represent the cost on a new page*
 
 
 
@@ -89,9 +101,13 @@ Anyway, the amount of work needed was minimal compared to an architectural refac
 
 ![Green areas represent the cost on a new page](https://miro.medium.com/max/913/0*6u7CqWxW2vRcoO2u "Green areas represent the cost on a new page")
 
+*Green areas represent the cost on a new page*
+
 
 
 Feel free to take a look at our main configuration with Senna.js/SPA: [https://github.com/uyuni-project/uyuni/tree/master/web/html/src/core/spa](https://twitter.com/luis_neves12)
+
+
 
 # Making Transitions Even Better
 
@@ -105,17 +121,23 @@ The good thing is that Senna.js transitions behavior can be easily extended. Thu
 
 ![**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render](https://miro.medium.com/max/1305/0*r4UqVtDfigppeCXB "**Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render")
 
+***Image with white screen:** old page -> remove old page -> transition -> add new page -> white screen -> finish render*
+
 
 
 Instead, we can extend it to be asynchronous and only show the new page when the render is finished, leaving the old page as a placeholder. Basically, it will render both pages on the screen and only show the new one when everything is ready.
 
 ![**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition](https://miro.medium.com/max/1305/0*rXt_4QY78n5gFdM2 "**Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition")
 
+***Image with asynchronous transition:** old page -> add new page -> finish render -> remove old page -> finish transition*
+
 
 
 Extra work can be done on the timing when the fetching happens to take advantage of the fact that all pages are fetched through Ajax. By default, the fetching happens when the user clicks a link.
 
 However, this can be optimized. For instance, we could start fetching a page when the user shows the intent of clicking a link while hovering over it for some seconds or (even more extreme) start fetching it on the mouse-down event. The click event only happens after the mouse-up event, therefore we could save some milliseconds due to hardware limitations speed between the mouse-down and mouse-up events. After doing some tests with this strategy, we noticed improvement of around 100ms on each transition.
+
+
 
 # Conclusion
 
